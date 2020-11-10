@@ -15,7 +15,7 @@ export default new Vuex.Store({
       basketItems.forEach(item => {
         if(state.basketItems.find(itemInArray => item.name === itemInArray.name)){
           item = state.basketItems.find(itemInArray => item.name === itemInArray.name);
-          this.increaseQtn(item);
+          this.item.quantity++
       }
       else{ 
         state.basketItems.push({

@@ -4,7 +4,7 @@
  <router-link to="/admin"><div class="nav-button">Admin</div></router-link> 
      <!-- <router-link to="/login"><div class="nav-button">Login</div></router-link>  -->
       <router-link to="/"><div class="nav-button">Home</div></router-link> 
-     <v-btn @click.prevent="signOut()">Log-out</v-btn>
+     <v-btn @click.prevent="signOut()" class="nav-button">Log-out</v-btn>
       <!-- <div v-if="currentUser"> -->
         <!-- <v-card
     class="mx-auto"
@@ -105,25 +105,30 @@ import 'firebase/firestore'
 <style lang="scss" scoped>
 a{
   text-decoration: none;
-  color: #fff
+  color: $blue-color;
 }
 .nav{
   width: 100%;
-  background-color: $colorz;
+  background-color: $light-turquoise;
   height: 72px;
-  display: grid;
-  grid-template-rows: 0.1fr;
-  grid-template-columns: 0.35fr 0.1fr 0.1fr 0.1fr;
-  place-items: center;
+  // display: grid;
+  // grid-template-rows: 0.1fr;
+  // grid-template-columns: 0.35fr 0.1fr 0.1fr 0.1fr;
+  // place-items: center;
+  display: flex;
+  justify-content: space-between;
 }
 .nav-button{
   height: 72px;
-  width: 60px;
-  background-color: aquamarine;
-
+  width: auto;
+  background-color: $turquoise;
+  text-align: center;
+  padding: 25px 0 0 0;
+  font-size: 20px;
+  font-family: 'Goldman', cursive;
 }
 .nav-button:hover{
-  background-color: #30da30;
+  background-color: $pink-color;
   transition: 1s;
 }
 </style>

@@ -12,8 +12,7 @@
             required
         ></v-text-field>
     <v-btn @click.prevent="signIn()">Submit</v-btn>
-    <v-btn @click.prevent="signOut()">Log-out</v-btn>
-   
+   <iframe src="https://crapcha.com/embed/" frameborder="0" scrolling="0" width="300" height="150"></iframe>
     </div>
 </template>
 
