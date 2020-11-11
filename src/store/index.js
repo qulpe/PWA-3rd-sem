@@ -1,11 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { dbMenuAdd } from '../../firebase'
+
+// import firebase from 'firebase'
+import 'firebase/firestore'
+
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    basketItems: []
+    basketItems: [],
+    menuItems: [],
+    currentUser: null
   },
     mutations: {
       
@@ -37,14 +44,33 @@ export default new Vuex.Store({
         state.currentUser = null
       }
     },
+    setMenuItems: state => {
+      let menuItems = []
+      dbMenuAdd.onSnapshot((snapshotItems) => {
+        menuItems = []
+        snapshotItems.forEach((doc) => {
+          var menuItemsData = doc.data();
+          menuItems.push({
+            ...menuItemsData,
+            id: doc.id
+          })
+      })
+      state.menuItems = menuItems
+    })
+    },
+  
   },
   actions: {
     setUser(context, user) {
       context.commit('userStatus', user)
+    },
+    setMenuItems: context => {
+      context.commit('setMenuItems')
     }
   },
   getters: {
     getBasketItems: state => state.basketItems,
-    currentUser: state => state.currentUser
+    currentUser: state => state.currentUser,
+    getMenuItems: state => state.menuItems
   }
 })

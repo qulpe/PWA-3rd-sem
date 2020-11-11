@@ -5,85 +5,43 @@
      <!-- <router-link to="/login"><div class="nav-button">Login</div></router-link>  -->
       <router-link to="/"><div class="nav-button">Home</div></router-link> 
      <v-btn @click.prevent="signOut()" class="nav-button">Log-out</v-btn>
-      <!-- <div v-if="currentUser"> -->
-        <!-- <v-card
-    class="mx-auto"
-    max-width="50"
-    tile
-  >
-    <v-img
-      height="50"
-      src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"
-    >
-      <v-row
-        align="end"
-        class="fill-height"
-      >
-        <v-col
-          align-self="start"
-          class="pa-0"
-          cols="12"
-        >
-          <v-avatar
-            class="profile"
-            color="grey"
-            size="50"
-            tile
-          >
-            <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
-          </v-avatar>
-        </v-col>
-        <v-col class="py-0">
-          <v-list-item
-            color="rgba(0, 0, 0, .4)"
-            dark
-          >
-            <v-list-item-content>
-              <v-list-item-title class="title">
-               {{ currentUser.email }}
-              </v-list-item-title>
-              <v-list-item-subtitle>Network Engineer</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-col>
-      </v-row>
-    </v-img>
-  </v-card> -->
+      <div v-if="currentUser">
+     <h4>  {{ currentUser.email }} </h4>
     
-    <!-- </div> -->
+    </div>  
     </div>
 </template>
 
 <script>
-// //  import { dbMenuAdd } from '../../firebase'
-             import firebase from 'firebase'
+import { dbMenuAdd } from '../../firebase'
+
+import firebase from 'firebase'
 import 'firebase/firestore'
-          
-// // // import store from '../store/index.js'
-// // firebase.auth().onAuthStateChanged(function(user){
-// //     if(user){
-// //         store.dispatch('setUser', user)
-// //     }else{
-// //         store.dispatch('setUser', null)
-// //     }
-// // });
+import store from '../store/index.js'
+firebase.auth().onAuthStateChanged(function(user){
+    if(user){
+        store.dispatch('setUser', user)
+    }else{
+        store.dispatch('setUser', null)
+    }
+});
 
 
  export default {
-//         //    created() {
-//         //     dbMenuAdd.get().then((querySnapshot) =>{
-//         //         querySnapshot.forEach((doc =>{
-//         //             console.log(doc.id, " => ", doc.data());
-//         //             var menuItemData = doc.data();
-//         //             this.menuItems.push({
-//         //                 // id: doc.id,
-//         //                 name: menuItemData.name,
-//         //                 description: menuItemData.description,
-//         //                 price: menuItemData.price,
-//         //             })
-//         //         }))
-//         //     })
-//         // },
+           created() {
+            dbMenuAdd.get().then((querySnapshot) =>{
+                querySnapshot.forEach((doc =>{
+                    console.log(doc.id, " => ", doc.data());
+                    var menuItemData = doc.data();
+                    this.menuItems.push({
+                        // id: doc.id,
+                        name: menuItemData.name,
+                        description: menuItemData.description,
+                        price: menuItemData.price,
+                    })
+                }))
+            })
+        },
       methods: {
        signOut() {
                 firebase.auth().signOut().then(() => {

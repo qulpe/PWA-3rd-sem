@@ -3,28 +3,22 @@
     <div class="advert"></div>
     <div class="container">
         <Product />
-        <Product />
-        <Product />
-                <Product />
-        <Product />
-        <Product />
-        <!-- <Menu /> -->
+   
+        <Menu />
     </div>
 </div>
 </template>
 
 <script>
-//   import Menu from '@/components/Menu.vue'
+  import Menu from '@/components/Menu.vue'
    import Product from '@/components/Product.vue'
 export default {
   name: 'app',
   props: {
     source: String,
   },
-//   components: {
-//     Menu
-//   }
   components: {
+    Menu,
     Product
   }
 }
@@ -33,18 +27,19 @@ export default {
 <style lang="scss" scoped>
 .container-full{
     height: auto;
-    width: 100%;
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    padding: 0;
+    margin: 0;
 }
 .advert{
     height: 80vh;
-    width: 100%;
+    padding: 0;
+    margin: 0;
     background: $pink-color;
 }
 .container{
     padding: 0;
-    width: 100%;
+    margin: 0;
     height: auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -53,8 +48,10 @@ export default {
 .container{
     height: auto;
     width: auto;
+    margin: 0;
+    padding: 0;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 0.1fr 0.1fr;
+    grid-template-rows: 1fr 1fr;
 }
 }
 </style>

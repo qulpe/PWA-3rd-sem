@@ -117,7 +117,7 @@ import { dbMenuAdd } from '../../firebase'
         subTotal () {
             var subCost = 0;
             for( var items in this.basket) {
-                var individualItem = this.basket[items];
+                var individualItem = this.basketDump[items];
                 subCost += individualItem.quantity * individualItem.price;
             }
             return subCost

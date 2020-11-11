@@ -76,28 +76,16 @@ export default {
     data () {
         return {
             basket: [],
-            menuItems: [],
-            
             name: '',
             description: '',
             price: '',
         }
     },
-          created() {
-            dbMenuAdd.get().then((querySnapshot) =>{
-                querySnapshot.forEach((doc =>{
-                    console.log(doc.id, " => ", doc.data());
-                    var menuItemData = doc.data();
-                    this.menuItems.push({
-                        ...doc.data(),
-                        id: doc.id,
-                        name: menuItemData.name,
-                        description: menuItemData.description,
-                        price: menuItemData.price,
-                    })
-                }))
-            })
-        },
+    beforeCreate() {
+        this.$store.dispatch('setMenuItems')
+    },
+
+          
     methods: {
         AddNewMenuItem() {
             dbMenuAdd.add({
@@ -113,7 +101,13 @@ export default {
                 console.error("Error deletind item: ", error);
             })
         }
+    },
+    computed: {
+        menuItems() {
+            return this.$store.getters.getMenuItems
+        }
     }
+
 }
 </script>
 <style lang="scss" scoped>
