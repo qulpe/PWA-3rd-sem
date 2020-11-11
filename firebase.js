@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/storage'
 
 var firebaseConfig = {
     apiKey: "AIzaSyBVhAidvimjnoIR4ckUn7gO9LQ8KIq5nDU",
@@ -12,7 +13,7 @@ var firebaseConfig = {
     measurementId: "G-SQELFHV9KZ"
 };
 
-firebase.initializeApp(firebaseConfig);
+export const fb = firebase.initializeApp(firebaseConfig);
 
 export const db = firebase.firestore()
 export const dbMenuAdd = db.collection('MenuItems');

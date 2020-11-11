@@ -1,18 +1,31 @@
 <template>
     <div class="product">
-        <img src="../assets/inca-ceva.png" alt="" width="350" height="300">
+        <img :src="currentItem.image" />
         <div class="text-container">
-        <p class="product-title">Product Title</p>
-        <p class="product-description">This is just a short product description meant to test</p>
+        <p class="product-title">{{ currentItem.name }} - €{{ currentItem.price }}</p>
+        <p class="product-description">{{ currentItem.description }}</p>
     
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        
-    }
+export default {
+  data() {
+    return {
+      cart: [],
+      currentItem: this.$route.params,
+      avaibleProducts: [],
+      computed: {
+        showProduct() {
+          const id = this.$route.params.id;
+          const product = this.avaibleProducts.find((p) => p.uuid == id);
+          return product;
+        },
+      },
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
