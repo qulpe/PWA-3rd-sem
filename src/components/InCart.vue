@@ -1,37 +1,36 @@
 <template>
-  <div>
-    <main>
-      <div class="wrap">
-        <div class="contact">
-          <h2>
-            YOU HAVE <span>{{ countOfCartProducts }}</span> ITEMS IN
-            <span>CART</span>
-          </h2>
-        </div>
-      </div>
-    </main>
+  <div class="cart">
+    <div class="wrap">
+      <h2 class="c-title">
+        YOU HAVE {{ countOfCartProducts }} ITEMS IN CART
+      </h2>
 
-    <div class="cart">
-      <div class="item" v-for="(item, index) in myCart" v-bind:key="index">
-        <div class="left-item">
-          <img :key="item.image" :src="item.image" class="p-image"/>
+        <div class="item" v-for="(item, index) in myCart" v-bind:key="index">
+          <div class="left-item">
+            <img :key="item.image" :src="item.image" class="p-image" />
+          </div>
+     
+            <h2>
+              {{ item.name }}
+            </h2>
+
+              <v-icon left v-on:click="removeFromCart">
+                DELETE
+              </v-icon>
+            
+            <h3>
+              Price €{{ item.price }}
+            </h3>
+          
         </div>
-        <div class="right">
-          <h2>
-            {{ item.name
-            }} <span class="remove" v-on:click="removeFromCart"></span>
-          </h2>
+       
           <h3>
-            Price <span>€{{ item.price }}</span>
+            Total Price:€{{ getTotal }}
           </h3>
-        </div>
-      </div>
-      <div class="total">
-        <h3>Total Price: <span>€{{ getTotal }}</span></h3>
-      </div>
-      <div class="pay-btn">
+        
+
         <button>PAY NOW</button>
-      </div>
+      
     </div>
   </div>
 </template>
@@ -63,9 +62,27 @@ export default {
 </script>
 
 <style type="scss" scoped>
-.p-image{
+.cart{
+  height: auto;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  font-family: "Goldman", cursive;
+  color: #31326f;
+}
+.wrap{
+  height: auto;
+  width: 100%;
+  background: #ffdada;
+  display: grid;
+  place-items: center;
+}
+.p-image {
   height: 25vh;
   width: 25vh;
-  
+}
+.item{
+  display: grid;
+  place-items: center;
 }
 </style>

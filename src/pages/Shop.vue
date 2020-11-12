@@ -4,15 +4,14 @@
 
     <div class="p-avaible" v-for="item in avaibleProducts" :key="item.name">
       <div class="product">
-        <router-link
-          @click.native="scrollToTop"
-          :to="{ name: 'Product', params: { ...item } }"
-        >
+        
           <img :key="item.image" :src="item.image" class="p-image" />
-        </router-link>
+    
         <div class="p-text-contain">
         <div class="p-name">{{ item.name }}</div>
         <div class="p-price">€{{ item.price }}</div>
+        
+        <div class="p-description">{{ item.description }}</div>
 
         <button class="add-to-cart" v-on:click="addToCart(item)">
           ADD TO CART
@@ -128,6 +127,9 @@ export default {
 }
 .add-to-cart{
   font-size: 2em;
+}
+.p-description{
+  margin: -10px 0 10px 0;
 }
 }
 </style>

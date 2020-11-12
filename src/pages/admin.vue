@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+<div class="administrator">
+  <div class="a-contain">
     <div class="admin">
       <v-text-field label="Name" required v-model="name"> </v-text-field>
       <v-text-field label="Description" required v-model="description">
@@ -57,6 +58,7 @@
         </v-card>
       </v-dialog>
     </v-app>
+  </div>
   </div>
 </template>
 <script>
@@ -160,45 +162,42 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.container {
+.administrator{
+  font-family: 'Goldman', cursive;
+  color: $blue-color;
   width: 100%;
-  height: 100%;
+  height: auto;
+}
+.a-contain {
+  width: 100%;
+  height: auto;
   display: grid;
   place-items: center;
-  grid-template-rows: 1fr;
 }
 .admin {
-  height: 35vh;
+  height: auto;
   width: 35vh;
-  background-color: blue;
+  background-color: $turquoise;
   display: grid;
   place-items: center;
 }
-.input {
-  width: 100px;
-  height: 30px;
-  background: #ffffff90;
-  margin: 10px 0 0 0;
-}
-.button {
-  width: 75px;
-  height: 30px;
-  background: #ffffff90;
-  text-align: center;
-}
-#one {
-  background: crimson;
-}
-#two {
-  background: darkgreen;
-}
 .preview {
-  background: crimson;
+  background: $pink-color;
   width: 35vh;
-  height: 35vh;
+  height: auto;
 }
 .p-image {
   height: 25vh;
   width: 25vh;
+}
+@media screen and (max-width: 600px) {
+.admin {
+  width: 100%;
+}
+.preview {
+  width: 100%;
+    display: grid;
+  place-items: center;
+}
 }
 </style>
