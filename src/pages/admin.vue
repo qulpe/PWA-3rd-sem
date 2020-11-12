@@ -2,6 +2,10 @@
 <div class="administrator">
   <div class="a-contain">
     <div class="admin">
+      <p>login credentials are:
+        bagel@bagel.com 
+        parola
+      </p>
       <v-text-field label="Name" required v-model="name"> </v-text-field>
       <v-text-field label="Description" required v-model="description">
       </v-text-field>
