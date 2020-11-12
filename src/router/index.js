@@ -4,7 +4,8 @@ import VueRouter from 'vue-router';
 import Home from '../pages/Home.vue';
 import Admin from '../pages/admin.vue';
 import Login from '../pages/login.vue';
-
+import Cart from '../pages/Cart.vue';
+import Shop from '../pages/Shop.vue';
 
 import firebase from 'firebase'
 import 'firebase/firestore'
@@ -34,7 +35,16 @@ const router = new VueRouter({
         name: "Login",
         component: Login,
     },
-
+    {
+        path: "/cart",
+        name: "Cart",
+        component: Cart,
+    },
+    {
+        path: "/Shop",
+        name: "Shop",
+        component: Shop,
+    },
     {
         path: "*",
         redirect: "/",

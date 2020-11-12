@@ -1,57 +1,74 @@
 <template>
-<div class="container-full">
-    <div class="advert"></div>
-    <div class="container">
-        <Product />
-   
-        <Menu />
+    <div class="home">
+        <div class="ad">
+            <div class="h-content"></div>
+            <p class="title">Some kind of title</p>
+        </div>
+        <div class="i-container">
+        <div class="info"></div>
+        </div>
     </div>
-</div>
 </template>
 
 <script>
-  import Menu from '@/components/Menu.vue'
-   import Product from '@/components/Product.vue'
-export default {
-  name: 'app',
-  props: {
-    source: String,
-  },
-  components: {
-    Menu,
-    Product
-  }
-}
+    export default {
+        
+    }
 </script>
 
 <style lang="scss" scoped>
-.container-full{
-    height: auto;
+.home{
     display: grid;
-    padding: 0;
-    margin: 0;
+    width: 100%;
+    height: auto;
+    font-family: 'Goldman', cursive;
 }
-.advert{
-    height: 80vh;
-    padding: 0;
-    margin: 0;
+.ad{
+    width: 100%;
+    height: 60vh;
     background: $pink-color;
-}
-.container{
-    padding: 0;
-    margin: 0;
-    height: auto;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    padding: 50px;
+}
+.h-content{
+    height: 45vh;
+    width: 45vh;
+    background: $turquoise;
+}
+.title{
+    font-size: 6em;
+    color: $blue-color;
+}
+.i-container{
+    width: 100%;
+    height: auto;
+    padding: 40px;
+}
+.info{
+    height: 50vh;
+    width: 50vh;
+    background: $turquoise;
 }
 @media screen and (max-width: 600px) { 
-.container{
+.ad{
     height: auto;
-    width: auto;
+    width: 100%;
     margin: 0;
-    padding: 0;
+    padding: 20px;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
+    overflow: hidden;
+}
+.i-container{
+    grid-template-columns: 1fr;
+    padding: 0;
+}
+.h-content{
+    width: 100%;
+}
+.info{
+    width: 100%;
 }
 }
 </style>

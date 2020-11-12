@@ -1,68 +1,26 @@
 <template>
-    <div class="product">
-        <img :src="currentItem.image" />
-        <div class="text-container">
-        <p class="product-title">{{ currentItem.name }} - €{{ currentItem.price }}</p>
-        <p class="product-description">{{ currentItem.description }}</p>
-    
-        </div>
+    <div>
+
     </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      cart: [],
-      currentItem: this.$route.params,
-      avaibleProducts: [],
-      computed: {
+    export default {
+        data(){
+            return{
+            avaibleProducts= [],
+            }
+        },
+        computed:{
         showProduct() {
           const id = this.$route.params.id;
           const product = this.avaibleProducts.find((p) => p.uuid == id);
           return product;
         },
-      },
-    };
-  },
-};
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
-p{
-    font-family: 'Goldman', cursive;
-}
-.product{
-    height: auto;
-    min-height: 30vh;
-    width: auto;
-    margin: 20px;
-    padding: 20px 10px;
-    background: $light-turquoise;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-}
-.product-title{
-    font-size: 35px;
-    color: $blue-color;
-    margin: 10px;
-}
-.product-description{
-    margin: 0px 10px;
-}
-@media screen and (max-width: 600px) { 
-.product{
-    height: auto;
-    min-height: 45vh;
-    width: auto;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 0.1fr 0.1fr;
-}
-}
-@media screen and (min-width: 600px) { 
-.product{
-    max-height: 30vh;
-}
-}
+
 </style>

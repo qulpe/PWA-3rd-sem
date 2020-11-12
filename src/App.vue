@@ -1,20 +1,25 @@
 <template>
 <div class="app">
-  <div class="navigation">
+ 
     <Navigation />
-  </div>
-<router-view />
+
+    <router-view />
+
+    <Footer />
+
 </div>
 </template>
 <script>
 import Navigation from '@/components/Navigation.vue'
+import Footer from '@/components/Footer.vue'
 export default {
   name: 'app',
   props: {
     source: String,
   },
   components: {
-    Navigation
+    Navigation,
+    Footer
   }
 }
 </script>

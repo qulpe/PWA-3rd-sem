@@ -1,76 +1,87 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { dbMenuAdd } from '../../firebase'
-
-// import firebase from 'firebase'
-import 'firebase/firestore'
-
+import { dbMenuAdd } from "../../firebase";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    basketItems: [],
-    menuItems: [],
+    cart: [],
+    avaibleProducts: [],
     currentUser: null
   },
-    mutations: {
-      
-
-    addBasketItems: (state, basketItems) =>{
-      if(basketItems instanceof Array){
-      basketItems.forEach(item => {
-        if(state.basketItems.find(itemInArray => item.name === itemInArray.name)){
-          item = state.basketItems.find(itemInArray => item.name === itemInArray.name);
-          this.item.quantity++
-      }
-      else{ 
-        state.basketItems.push({
-          name: item.name,
-          price: item.price,
-          quantity: 1
-      })
-      }
-      
-    })
-  }
+  getters: {
+    countOfCartProducts: state => {
+      return state.cart.length
+    },
+    myCart: state => {
+      return state.cart
+    },
+    getTotal: state => {
+      return state.cart.reduce((total, lineItem) => Number(total) + Number(lineItem.price), 0);
+    },
+    currentUser: state => {
+      return state.currentUser
+    },
+    getAvaibleProducts: state => {
+      return state.avaibleProducts
+    }
   },
-    userStatus (state, user){
-      if(user) {
-        state.currentUser = user
+  mutations: {
+    ADD_TO_CART: (state, product) => {
+      if (state.cart.findIndex(item => item.id === product.id) !== -1) {
+        return
       }
-
       else {
+        state.cart.push(product)
+      }
+    },
+    REMOVE_FROM_CART: (state, product) => {
+      state.cart.splice(product, 1)
+    },
+    userStatus(state, user) {
+      if (user) {
+        state.currentUser = user
+      } else {
         state.currentUser = null
       }
     },
-    setMenuItems: state => {
-      let menuItems = []
+    setAvaibleProducts: state => {
+
+      let avaibleProducts = []
+
       dbMenuAdd.onSnapshot((snapshotItems) => {
-        menuItems = []
+
+        avaibleProducts = []
+
         snapshotItems.forEach((doc) => {
-          var menuItemsData = doc.data();
-          menuItems.push({
-            ...menuItemsData,
+
+          var avaibleItemData = doc.data();
+
+          avaibleProducts.push({
+
+            ...avaibleItemData,
+
             id: doc.id
+
           })
+
+        })
+
+        state.avaibleProducts = avaibleProducts // moved inside
+
       })
-      state.menuItems = menuItems
-    })
+
     },
-  
   },
   actions: {
     setUser(context, user) {
       context.commit('userStatus', user)
     },
-    setMenuItems: context => {
-      context.commit('setMenuItems')
+    setAvaibleProducts(context) {
+      context.commit('setAvaibleProducts')
     }
   },
-  getters: {
-    getBasketItems: state => state.basketItems,
-    currentUser: state => state.currentUser,
-    getMenuItems: state => state.menuItems
+  modules: {
   }
-})
+});
