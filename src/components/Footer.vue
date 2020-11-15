@@ -1,12 +1,11 @@
 <template>
   <div class="footer">
-      <div>
-    <div @click.prevent="signOut()" class="footer-button">Log-out</div>
-    <div v-if="currentUser" class="log">
-      <h4>You are logged in as: {{ currentUser.email }}</h4>
-        
-    </div>
-    <div class="filler"></div>
+    <div>
+      <div @click.prevent="signOut()" class="footer-button">Log-out</div>
+      <div v-if="currentUser" class="log">
+        <h4>You are logged in as: {{ currentUser.email }}</h4>
+      </div>
+      <div class="filler"></div>
     </div>
   </div>
 </template>
@@ -70,29 +69,29 @@ export default {
   display: grid;
   grid-template-columns: 1fr;
   padding: 50px 0 0 0;
-  font-family: 'Goldman', cursive;
+  font-family: "Goldman", cursive;
 }
-.log{
-    color: $light-turquoise;
+.log {
+  color: $light-turquoise;
 }
-.footer-button{
-    color: $light-turquoise;
-    background: $blue-color;
-    padding: 15px;
+.footer-button {
+  color: $light-turquoise;
+  background: $blue-color;
+  padding: 15px;
 }
-.filler{
-    background: url('../assets/ceva-random.png');
-    height: 150px;
-    width: 100%;
-    opacity: 0.5;
-      background-attachment: fixed;
+.filler {
+  background: url("../assets/ceva-random.png");
+  height: 150px;
+  width: 100%;
+  opacity: 0.5;
+  background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-@media screen and (max-width: 600px) { 
-    .footer{
-        padding: 20px;
-    }
+@media screen and (max-width: 600px) {
+  .footer {
+    padding: 20px 0;
+  }
 }
 </style>

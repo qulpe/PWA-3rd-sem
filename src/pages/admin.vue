@@ -1,39 +1,32 @@
 <template>
-<div class="administrator">
-  <div class="a-contain">
-    <div class="admin">
-      <p>login credentials are:
-        bagel@bagel.com 
-        parola
-      </p>
-      <v-text-field label="Name" required v-model="name"> </v-text-field>
-      <v-text-field label="Description" required v-model="description">
-      </v-text-field>
-      <v-text-field label="Price" required v-model="price"> </v-text-field>
-      <v-file-input label="File input" @change="uploadImage"></v-file-input>
+  <div class="administrator">
+    <div class="a-contain">
+      <div class="admin">
+        <p>login credentials are: bagel@bagel.com parola</p>
+        <v-text-field label="Name" required v-model="name"> </v-text-field>
+        <v-text-field label="Description" required v-model="description">
+        </v-text-field>
+        <v-text-field label="Price" required v-model="price"> </v-text-field>
+        <v-file-input label="File input" @change="uploadImage"></v-file-input>
 
-      <v-btn @click="AddNewMenuItem">Add</v-btn>
-    </div>
-    <br /><br /><br />
-    <v-simple-table id="menu-table"> </v-simple-table>
-    <div class="preview">
-      <div class="p-avaible" v-for="item in avaibleProducts" :key="item.name">
-        <div class="product">
-          <router-link
-            @click.native="scrollToTop"
-            :to="{ name: 'Product', params: { ...item } }"
-          >
-            <img :key="item.image" :src="item.image" class="p-image" />
-          </router-link>
-          <div class="p-name">{{ item.name }}</div>
-          <div class="p-price">€{{ item.price }}</div>
-          <v-btn @click.stop="dialog = true" @click="editItem(item)">
-            <v-icon>edit</v-icon>
-          </v-btn>
-          <v-btn @click="deleteItem(item.id)">Delete</v-btn>
-        </div>
+        <v-btn @click="AddNewMenuItem">Add</v-btn>
       </div>
-      <!-- <v-simple-table id="menu-table">
+      <br />
+      <v-simple-table id="menu-table"> </v-simple-table>
+      <div class="preview">
+        <div class="p-avaible" v-for="item in avaibleProducts" :key="item.name">
+          <div class="product">
+            <img :key="item.image" :src="item.image" class="p-image" />
+
+            <div class="p-name">{{ item.name }}</div>
+            <div class="p-price">€{{ item.price }}</div>
+            <v-btn @click.stop="dialog = true" @click="editItem(item)">
+              <v-icon>edit</v-icon>
+            </v-btn>
+            <v-btn @click="deleteItem(item.id)">Delete</v-btn>
+          </div>
+        </div>
+        <!-- <v-simple-table id="menu-table">
         <tbody>
           <tr>
             <td id="preview_menuitem_price">{{ name }}</td>
@@ -47,22 +40,24 @@
        
         </tbody>
       </v-simple-table> -->
+      </div>
+      <v-app>
+        <v-dialog v-model="dialog" max-width="400">
+          <v-card>
+            <h1>Edit Item</h1>
+            <v-text-field v-model="item.name"></v-text-field>
+            <v-text-field v-model="item.description"></v-text-field>
+            <v-text-field v-model="item.price"></v-text-field>
+            <v-btn @click="updateItem()" @click.stop="dialog = false"
+              >Edit</v-btn
+            >
+            <v-btn @click.stop="dialog = false">
+              Cancel
+            </v-btn>
+          </v-card>
+        </v-dialog>
+      </v-app>
     </div>
-    <v-app>
-      <v-dialog v-model="dialog" max-width="400">
-        <v-card>
-          <h1>Edit Item</h1>
-          <v-text-field v-model="item.name"></v-text-field>
-          <v-text-field v-model="item.description"></v-text-field>
-          <v-text-field v-model="item.price"></v-text-field>
-          <v-btn @click="updateItem()" @click.stop="dialog = false">Edit</v-btn>
-          <v-btn @click.stop="dialog = false">
-            Cancel
-          </v-btn>
-        </v-card>
-      </v-dialog>
-    </v-app>
-  </div>
   </div>
 </template>
 <script>
@@ -132,10 +127,10 @@ export default {
         .doc(this.activeEditItem)
         .update(this.item)
         .then(() => {
-          console.log("mda, ma pis");
+          console.log("edited item");
         })
         .catch(function(error) {
-          console.error("eroare coaie ce plm faci", error);
+          console.error("edit item error", error);
         });
     },
     AddNewMenuItem() {
@@ -151,10 +146,10 @@ export default {
         .doc(id)
         .delete()
         .then(function() {
-          console.log("Item removed succsessfully");
+          console.log("Item removed successfully");
         })
         .catch(function(error) {
-          console.error("Error deletind item: ", error);
+          console.error("Error deleting item: ", error);
         });
     },
   },
@@ -166,8 +161,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.administrator{
-  font-family: 'Goldman', cursive;
+.administrator {
+  font-family: "Goldman", cursive;
   color: $blue-color;
   width: 100%;
   height: auto;
@@ -195,13 +190,13 @@ export default {
   width: 25vh;
 }
 @media screen and (max-width: 600px) {
-.admin {
-  width: 100%;
-}
-.preview {
-  width: 100%;
+  .admin {
+    width: 100%;
+  }
+  .preview {
+    width: 100%;
     display: grid;
-  place-items: center;
-}
+    place-items: center;
+  }
 }
 </style>

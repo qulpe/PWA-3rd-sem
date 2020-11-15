@@ -1,7 +1,8 @@
 <template>
   <div class="login">
-    <v-text-field v-model="email" label="Email" required></v-text-field>
-    <v-text-field v-model="password" label="Password" required></v-text-field>
+    <h3>Credentials: -Email: bagel@bagel.com -Password: parola </h3>
+    <v-text-field v-model="email" label="Email" value="bagel@bagel.com" required></v-text-field>
+    <v-text-field v-model="password" label="Password" value="parola" required></v-text-field>
     <v-btn @click.prevent="signIn()">Submit</v-btn>
 
     <!-- <iframe
